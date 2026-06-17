@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApplications } from "../hooks/useApplications.js";
 import ApplicationCard from "../components/ApplicationCard.jsx";
+import { Send, Users, BadgeCheck, XCircle } from "lucide-react";
 
 const STATUSES = ["", "Applied", "Interviewing", "Offer", "Rejected"];
 const STATUS_LABELS = {
@@ -12,11 +13,11 @@ const STATUS_LABELS = {
   Rejected: "Rejected",
 };
 
-const STATUS_DOT = {
-  Applied: "bg-blue-400",
-  Interviewing: "bg-amber-400",
-  Offer: "bg-emerald-400",
-  Rejected: "bg-red-400",
+const STATUS_ICON = {
+  Applied: <Send className="w-4 h-4 text-black-500" />,
+  Interviewing: <Users className="w-4 h-4 text-black-500" />,
+  Offer: <BadgeCheck className="w-4 h-4 text-black-500" />,
+  Rejected: <XCircle className="w-4 h-4 text-black-500" />,
 };
 
 function StatsBar({ applications }) {
@@ -32,7 +33,9 @@ function StatsBar({ applications }) {
           key={status}
           className="bg-white border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"
         >
-          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${STATUS_DOT[status]}`} />
+          <div className="flex-shrink-0">
+            {STATUS_ICON[status]}
+          </div>
           <div>
             <p className="text-2xl font-semibold text-slate-900 leading-none">{count}</p>
             <p className="text-xs text-slate-400 mt-1">{status}</p>
@@ -43,21 +46,70 @@ function StatsBar({ applications }) {
   );
 }
 
+function Pagination({ pagination, page, setPage }) {
+  if (!pagination || pagination.totalPages <= 1) return null;
+
+  return (
+    <div className="flex items-center justify-between mt-8 pt-4 border-t border-slate-200">
+      <p className="text-xs text-slate-400">
+        Showing {(page - 1) * pagination.limit + 1}–
+        {Math.min(page * pagination.limit, pagination.total)} of {pagination.total}
+      </p>
+
+      <div className="flex items-center gap-1">
+        <button
+          onClick={() => setPage((p) => p - 1)}
+          disabled={!pagination.hasPrev}
+          className="px-3 py-1.5 text-xs font-medium border border-slate-200 rounded-lg bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        >
+          ← Prev
+        </button>
+
+        {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map((p) => (
+          <button
+            key={p}
+            onClick={() => setPage(p)}
+            className={`w-8 h-8 text-xs font-medium rounded-lg border transition-colors ${p === page
+                ? "bg-[#0A66C2] text-white border-[#0A66C2]"
+                : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+              }`}
+          >
+            {p}
+          </button>
+        ))}
+
+        <button
+          onClick={() => setPage((p) => p + 1)}
+          disabled={!pagination.hasNext}
+          className="px-3 py-1.5 text-xs font-medium border border-slate-200 rounded-lg bg-white text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        >
+          Next →
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function ApplicationsPage() {
   const navigate = useNavigate();
   const [statusFilter, setStatusFilter] = useState("");
   const [search, setSearch] = useState("");
 
-  const { applications, loading, error, deleteApplication } = useApplications({
-    status: statusFilter,
-    search,
-  });
+  const {
+    applications,
+    pagination,
+    loading,
+    error,
+    page,
+    setPage,
+    deleteApplication,
+  } = useApplications({ status: statusFilter, search });
 
   return (
     <div>
       {/* Header */}
       <div className="mb-6">
-        <h1 className="text-2xl font-semibold text-slate-900">My Applications</h1>
+        <h1 className="text-2xl font-semibold text-[#0A66C2]">My Applications</h1>
         <p className="text-sm text-slate-400 mt-1">Track every opportunity in your pipeline</p>
       </div>
 
@@ -87,11 +139,10 @@ export default function ApplicationsPage() {
             <button
               key={s}
               onClick={() => setStatusFilter(s)}
-              className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${
-                statusFilter === s
-                  ? "bg-slate-900 text-white border-slate-900"
+              className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${statusFilter === s
+                  ? "bg-[#0A66C2] text-white border-[#0A66C2]"
                   : "bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-700"
-              }`}
+                }`}
             >
               {STATUS_LABELS[s]}
             </button>
@@ -100,9 +151,9 @@ export default function ApplicationsPage() {
       </div>
 
       {/* Count */}
-      {!loading && !error && applications.length > 0 && (
+      {!loading && !error && pagination && (
         <p className="text-xs text-slate-400 mb-4">
-          {applications.length} application{applications.length !== 1 ? "s" : ""}
+          {pagination.total} application{pagination.total !== 1 ? "s" : ""}
         </p>
       )}
 
@@ -145,12 +196,26 @@ export default function ApplicationsPage() {
 
       {/* Cards grid */}
       {!loading && !error && applications.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {applications.map((app) => (
-            <ApplicationCard key={app.id} application={app} onDelete={deleteApplication} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {applications.map((app) => (
+              <ApplicationCard key={app.id} application={app} onDelete={deleteApplication} />
+            ))}
+          </div>
+
+          <Pagination pagination={pagination} page={page} setPage={setPage} />
+        </>
       )}
+
+      <footer className="mt-50 pt-6 border-t border-slate-200 text-center">
+      <p className="text-sm text-slate-500">
+        Job Application Tracker © {new Date().getFullYear()}
+      </p>
+
+      <p className="text-xs text-slate-400 mt-1">
+        Built by Ayush
+      </p>
+    </footer>
     </div>
   );
 }

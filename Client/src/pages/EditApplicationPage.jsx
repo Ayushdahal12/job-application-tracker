@@ -60,7 +60,7 @@ export default function EditApplicationPage() {
         >
           ← Back to applications
         </button>
-        <h1 className="text-2xl font-bold text-slate-900">Edit Application</h1>
+        <h1 className="text-2xl font-bold text-[#0A66C2]">Edit Application</h1>
         {application && (
           <p className="text-sm text-slate-500 mt-0.5">
             {application.company_name} — {application.job_title}
@@ -82,6 +82,16 @@ export default function EditApplicationPage() {
             isLoading={isLoading}
             submitLabel="Save Changes"
           />
+
+           <footer className="mt-50 pt-6 border-t border-slate-200 text-center">
+      <p className="text-sm text-slate-500">
+        Job Application Tracker © {new Date().getFullYear()}
+      </p>
+
+      <p className="text-xs text-slate-400 mt-1">
+        Built by Ayush
+      </p>
+    </footer>
         </div>
       )}
     </div>

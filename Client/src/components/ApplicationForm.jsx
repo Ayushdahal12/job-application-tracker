@@ -9,10 +9,10 @@ const SUGGESTED_COMPANIES = ["Google", "Microsoft", "Apple", "Amazon", "Netflix"
 const SUGGESTED_TITLES = ["Software Engineer", "Frontend Engineer", "Backend Engineer", "Fullstack Engineer", "Product Manager", "UI/UX Designer", "Data Scientist"];
 
 const STATUS_COLORS = {
-  Applied: "peer-checked:bg-blue-50 peer-checked:text-blue-700 peer-checked:ring-blue-600/20 text-slate-600 hover:bg-slate-50",
+  Applied: "peer-checked:bg-[#0A66C2]/10 peer-checked:text-[#0A66C2] peer-checked:ring-[#0A66C2]/20 text-slate-600 hover:bg-slate-50",
   Interviewing: "peer-checked:bg-amber-50 peer-checked:text-amber-700 peer-checked:ring-amber-600/20 text-slate-600 hover:bg-slate-50",
   Offer: "peer-checked:bg-emerald-50 peer-checked:text-emerald-700 peer-checked:ring-emerald-600/20 text-slate-600 hover:bg-slate-50",
-  Rejected: "peer-checked:bg-slate-100 peer-checked:text-slate-700 peer-checked:ring-slate-300 text-slate-600 hover:bg-slate-50",
+  Rejected: "peer-checked:bg-amber-50 peer-checked:text-amber-700 peer-checked:ring-amber-600/20 text-slate-600 hover:bg-slate-50",
 };
 
 export default function ApplicationForm({ initialData = {}, onSubmit, isLoading, submitLabel = "Save Application" }) {
@@ -111,7 +111,7 @@ export default function ApplicationForm({ initialData = {}, onSubmit, isLoading,
             className={`w-full px-3.5 py-2.5 text-sm bg-slate-50/50 rounded-xl border transition-all placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2
               ${errors.company_name 
                 ? "border-red-300 bg-red-50/30 focus:ring-red-500/20 focus:border-red-500" 
-                : "border-slate-200 focus:ring-indigo-500/20 focus:border-indigo-500"}`}
+                : "border-slate-200 focus:ring-[#0A66C2]/20 focus:border-[#0A66C2]"}`}
           />
           {errors.company_name && (
             <p className="text-xs font-medium text-red-500 mt-1.5">⚠ {errors.company_name}</p>
@@ -160,7 +160,7 @@ export default function ApplicationForm({ initialData = {}, onSubmit, isLoading,
             className={`w-full px-3.5 py-2.5 text-sm bg-slate-50/50 rounded-xl border transition-all placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2
               ${errors.job_title 
                 ? "border-red-300 bg-red-50/30 focus:ring-red-500/20 focus:border-red-500" 
-                : "border-slate-200 focus:ring-indigo-500/20 focus:border-indigo-500"}`}
+                : "border-slate-200 focus:ring-[#0A66C2]/20 focus:border-[#0A66C2]"}`}
           />
           {errors.job_title && (
             <p className="text-xs font-medium text-red-500 mt-1.5">⚠ {errors.job_title}</p>
@@ -184,7 +184,7 @@ export default function ApplicationForm({ initialData = {}, onSubmit, isLoading,
                 <button
                   type="button"
                   onClick={() => setShowTitleDropdown(false)}
-                  className="w-full text-left px-3 py-2 text-xs rounded-lg bg-indigo-50/50 text-indigo-600 font-semibold border border-dashed border-indigo-200"
+                  className="w-full text-left px-3 py-2 text-xs rounded-lg bg-[#0A66C2]/10 text-[#0A66C2] font-semibold border border-dashed border-[#0A66C2]/20"
                 >
                   Plus: Add "{form.job_title}" as custom role
                 </button>
@@ -206,7 +206,7 @@ export default function ApplicationForm({ initialData = {}, onSubmit, isLoading,
             className={`w-full sm:w-1/2 px-3.5 py-2.5 text-sm bg-slate-50/50 rounded-xl border transition-all focus:outline-none focus:bg-white focus:ring-2
               ${errors.applied_date 
                 ? "border-red-300 bg-red-50/30 focus:ring-red-500/20 focus:border-red-500" 
-                : "border-slate-200 focus:ring-indigo-500/20 focus:border-indigo-500"}`}
+                : "border-slate-200 focus:ring-[#0A66C2]/20 focus:border-[#0A66C2]"}`}
           />
         </div>
       </div>
@@ -227,7 +227,7 @@ export default function ApplicationForm({ initialData = {}, onSubmit, isLoading,
                 onChange={handleChange}
                 className="sr-only peer"
               />
-              <div className="w-full text-center py-2.5 text-xs font-semibold rounded-xl border border-slate-200 text-slate-600 transition-all bg-white peer-checked:bg-slate-900 peer-checked:text-white peer-checked:border-slate-900 hover:bg-slate-50">
+              <div className="w-full text-center py-2.5 text-xs font-semibold rounded-xl border border-slate-200 text-slate-600 transition-all bg-white peer-checked:bg-[#0A66C2] peer-checked:text-white peer-checked:border-[#0A66C2] hover:bg-slate-50">
                 {JOB_TYPE_LABELS[type]}
               </div>
             </label>
@@ -268,7 +268,7 @@ export default function ApplicationForm({ initialData = {}, onSubmit, isLoading,
           onChange={handleChange}
           rows={3}
           placeholder="Add interview notes, referrals, or salary details..."
-          className="w-full px-3.5 py-2.5 text-sm bg-slate-50/50 rounded-xl border border-slate-200 focus:outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all resize-none placeholder:text-slate-400"
+          className="w-full px-3.5 py-2.5 text-sm bg-slate-50/50 rounded-xl border border-slate-200 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#0A66C2]/20 focus:border-[#0A66C2] transition-all resize-none placeholder:text-slate-400"
         />
       </div>
 
@@ -277,7 +277,7 @@ export default function ApplicationForm({ initialData = {}, onSubmit, isLoading,
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full sm:w-auto px-6 py-3 text-sm font-semibold rounded-xl text-white bg-slate-900 hover:bg-slate-800 focus:ring-4 focus:ring-slate-900/10 active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2 shadow-sm"
+          className="w-full sm:w-auto px-6 py-3 text-sm font-semibold rounded-xl text-white bg-[#0A66C2] hover:bg-[#0A66C2]/90 focus:ring-4 focus:ring-[#0A66C2]/10 active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2 shadow-sm"
         >
           {isLoading && (
             <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">

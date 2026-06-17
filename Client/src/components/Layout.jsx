@@ -11,10 +11,10 @@ export default function Layout() {
           
           {/* Logo */}
           <NavLink to="/" className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-[#0A66C2] flex items-center justify-center">
               <span className="text-white text-xs font-bold">JT</span>
             </div>
-            <span className="font-semibold text-slate-900 text-sm">Job Tracker</span>
+            <span className="font-semibold text-[#0A66C2] text-sm">Job Tracker</span>
           </NavLink>
 
           {/* Right side */}
@@ -25,8 +25,8 @@ export default function Layout() {
               className={({ isActive }) =>
                 `text-sm px-3 py-1.5 rounded-lg transition-colors ${
                   isActive
-                    ? "bg-slate-100 text-slate-900 font-medium"
-                    : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
+                    ? "bg-slate-100 text-[#0A66C2] font-medium"
+                    : "text-slate-500 hover:text-[#0A66C2] hover:bg-slate-50"
                 }`
               }
             >
@@ -35,7 +35,7 @@ export default function Layout() {
 
             <button
               onClick={() => navigate("/add")}
-              className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-700 text-white text-sm font-medium px-3.5 py-1.5 rounded-lg transition-colors ml-1"
+              className="flex items-center gap-1.5 bg-[#0A66C2] hover:bg-[#0A5AA8] text-white text-sm font-medium px-3.5 py-1.5 rounded-lg transition-colors ml-1"
             >
               <span className="text-base leading-none">+</span>
               Add new
@@ -43,7 +43,7 @@ export default function Layout() {
           </div>
         </div>
       </header>
-
+              
       {/* Page content */}
       <main className="max-w-5xl mx-auto px-4 py-8">
         <Outlet />

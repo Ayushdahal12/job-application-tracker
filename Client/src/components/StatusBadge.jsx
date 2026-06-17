@@ -1,23 +1,23 @@
 const STATUS_CONFIG = {
   Applied: {
     label: "Applied",
-    dot: "bg-blue-400",
-    className: "bg-blue-50 text-blue-700 border border-blue-200",
+    dot: "bg-[#0A66C2]",
+    className: "bg-[#0A66C2]/10 text-[#0A66C2] border border-[#0A66C2]/20",
   },
   Interviewing: {
     label: "Interviewing",
-    dot: "bg-amber-400",
+    dot: "bg-[#0A66C2]",
     className: "bg-amber-50 text-amber-700 border border-amber-200",
   },
   Offer: {
     label: "Offer",
-    dot: "bg-green-400",
+    dot: "bg-[#0A66C2]",
     className: "bg-green-50 text-green-700 border border-green-200",
   },
   Rejected: {
     label: "Rejected",
-    dot: "bg-red-400",
-    className: "bg-red-50 text-red-700 border border-red-200",
+    dot: "bg-[#0A66C2]",
+    className: "bg-amber-50 text-amber-700 border border-amber-200",
   },
 };
 

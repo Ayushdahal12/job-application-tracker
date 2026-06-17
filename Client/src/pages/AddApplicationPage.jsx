@@ -38,7 +38,7 @@ export default function AddApplicationPage() {
           </button>
           
           <div className="border-b border-slate-200 pb-5">
-            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+            <h1 className="text-3xl font-extrabold tracking-tight text-[#0A66C2] sm:text-4xl">
               Add New Application
             </h1>
             <p className="mt-2 text-sm text-slate-500">
@@ -66,9 +66,19 @@ export default function AddApplicationPage() {
             isLoading={isLoading}
             submitLabel="Create Application"
           />
+          
         </div>
-        
+         <footer className="mt-50 pt-6 border-t border-slate-200 text-center">
+      <p className="text-sm text-blue-600">
+        Job Application Tracker © {new Date().getFullYear()}
+      </p>
+
+      <p className="text-xs text-blue-400 mt-1">
+        Built by Ayush
+      </p>
+    </footer>
       </div>
+      
     </div>
   );
 }

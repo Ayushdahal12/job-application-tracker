@@ -5,10 +5,13 @@ const prisma = new PrismaClient();
 // GET /applications
 export const getAllApplications = async (req, res) => {
   try {
-    const { status, job_type, search } = req.query;
+    const { status, job_type, search, page = 1, limit = 6 } = req.query;
+
+    const pageNum = parseInt(page);
+    const limitNum = parseInt(limit);
+    const skip = (pageNum - 1) * limitNum;
 
     const where = {};
-
     if (status) where.status = status;
     if (job_type) where.job_type = job_type;
     if (search) {
@@ -18,12 +21,27 @@ export const getAllApplications = async (req, res) => {
       ];
     }
 
-    const applications = await prisma.application.findMany({
-      where,
-      orderBy: { applied_date: "desc" },
-    });
+    const [applications, total] = await Promise.all([
+      prisma.application.findMany({
+        where,
+        orderBy: { applied_date: "desc" },
+        skip,
+        take: limitNum,
+      }),
+      prisma.application.count({ where }),
+    ]);
 
-    res.json({ data: applications, count: applications.length });
+    res.json({
+      data: applications,
+      pagination: {
+        total,
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(total / limitNum),
+        hasNext: pageNum < Math.ceil(total / limitNum),
+        hasPrev: pageNum > 1,
+      },
+    });
   } catch (error) {
     console.error("getAllApplications error:", error);
     res.status(500).json({ error: "Failed to fetch applications" });
@@ -34,13 +52,10 @@ export const getAllApplications = async (req, res) => {
 export const getApplicationById = async (req, res) => {
   try {
     const { id } = req.params;
-
     const application = await prisma.application.findUnique({ where: { id } });
-
     if (!application) {
       return res.status(404).json({ error: "Application not found" });
     }
-
     res.json({ data: application });
   } catch (error) {
     console.error("getApplicationById error:", error);
@@ -53,7 +68,6 @@ export const createApplication = async (req, res) => {
   try {
     const { company_name, job_title, job_type, status, applied_date, notes } = req.body;
 
-    // Validation
     if (!company_name || !job_title || !job_type || !applied_date) {
       return res.status(400).json({
         error: "Missing required fields: company_name, job_title, job_type, applied_date",
@@ -74,9 +88,6 @@ export const createApplication = async (req, res) => {
     res.status(201).json({ data: application, message: "Application created successfully" });
   } catch (error) {
     console.error("createApplication error:", error);
-    if (error.code === "P2002") {
-      return res.status(409).json({ error: "Duplicate application entry" });
-    }
     res.status(500).json({ error: "Failed to create application" });
   }
 };
@@ -122,7 +133,6 @@ export const deleteApplication = async (req, res) => {
     }
 
     await prisma.application.delete({ where: { id } });
-
     res.json({ message: "Application deleted successfully" });
   } catch (error) {
     console.error("deleteApplication error:", error);
