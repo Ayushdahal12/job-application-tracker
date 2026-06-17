@@ -15,37 +15,59 @@ export default function AddApplicationPage() {
       await api.create(formData);
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="max-w-2xl">
-      <div className="mb-6">
-        <button
-          onClick={() => navigate("/")}
-          className="text-sm text-slate-500 hover:text-slate-800 mb-3 flex items-center gap-1 transition-colors"
-        >
-          ← Back to applications
-        </button>
-        <h1 className="text-2xl font-bold text-slate-900">Add Application</h1>
-        <p className="text-sm text-slate-500 mt-0.5">Track a new job opportunity</p>
-      </div>
-
-      {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-5 text-sm text-red-700">
-          {error}
+    <div className="min-h-screen bg-slate-50/50 py-12 px-4 sm:px-6 lg:px-8 flex justify-center">
+      <div className="w-full max-w-2xl">
+        
+        {/* Navigation & Header Section */}
+        <div className="mb-8">
+          <button
+            onClick={() => navigate("/")}
+            className="group mb-4 flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors duration-200"
+          >
+            <span className="transform group-hover:-translate-x-1 transition-transform duration-200">
+              &larr;
+            </span>
+            Back to dashboard
+          </button>
+          
+          <div className="border-b border-slate-200 pb-5">
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Add New Application
+            </h1>
+            <p className="mt-2 text-sm text-slate-500">
+              Keep your job hunt organized. Fill out the details below to track this opportunity.
+            </p>
+          </div>
         </div>
-      )}
 
-      <div className="card p-6">
-        <ApplicationForm
-          onSubmit={handleSubmit}
-          isLoading={isLoading}
-          submitLabel="Add Application"
-        />
+        {/* Error Alert */}
+        {error && (
+          <div className="mb-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800 shadow-sm animate-fade-in">
+            <svg className="h-5 w-5 text-red-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <span className="font-semibold">Submission failed:</span> {error}
+            </div>
+          </div>
+        )}
+
+        {/* Form Container Card */}
+        <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm ring-1 ring-slate-900/5 sm:p-8">
+          <ApplicationForm
+            onSubmit={handleSubmit}
+            isLoading={isLoading}
+            submitLabel="Create Application"
+          />
+        </div>
+        
       </div>
     </div>
   );

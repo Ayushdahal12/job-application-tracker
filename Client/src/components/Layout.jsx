@@ -7,37 +7,40 @@ export default function Layout() {
     <div className="min-h-screen bg-slate-50">
       {/* Navbar */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <NavLink to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold text-sm">
-              JT
+        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+          
+          {/* Logo */}
+          <NavLink to="/" className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-slate-900 flex items-center justify-center">
+              <span className="text-white text-xs font-bold">JT</span>
             </div>
-            <span className="font-semibold text-slate-800 text-sm tracking-tight">
-              Job Tracker
-            </span>
+            <span className="font-semibold text-slate-900 text-sm">Job Tracker</span>
           </NavLink>
 
-          <nav className="flex items-center gap-2">
+          {/* Right side */}
+          <div className="flex items-center gap-2">
             <NavLink
               to="/"
               end
               className={({ isActive }) =>
-                `text-sm font-medium px-3 py-1.5 rounded-lg transition-colors ${
+                `text-sm px-3 py-1.5 rounded-lg transition-colors ${
                   isActive
-                    ? "bg-brand-50 text-brand-600"
-                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    ? "bg-slate-100 text-slate-900 font-medium"
+                    : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
                 }`
               }
             >
               Applications
             </NavLink>
+
             <button
               onClick={() => navigate("/add")}
-              className="btn-primary text-sm ml-2"
+              className="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-700 text-white text-sm font-medium px-3.5 py-1.5 rounded-lg transition-colors ml-1"
             >
-              + Add New
+              <span className="text-base leading-none">+</span>
+              Add new
             </button>
-          </nav>
+          </div>
         </div>
       </header>
 
