@@ -27,25 +27,25 @@ A full-stack web application to organize and track job applications. Monitor app
 ## Screenshots
 
 ### 1. Dashboard
-![Dashboard](./screenshots/photo1.png)
+![Dashboard](https://raw.githubusercontent.com/Ayushdahal12/job-application-tracker/main/screenshots/photo1.png)
 
 ### 2. Application Cards
-![Application Cards](./screenshots/photo2.png)
+![Application Cards](https://raw.githubusercontent.com/Ayushdahal12/job-application-tracker/main/screenshots/photo2.png)
 
 ### 3. Add Application
-![Add Application](./screenshots/photo3.png)
+![Add Application](https://raw.githubusercontent.com/Ayushdahal12/job-application-tracker/main/screenshots/photo3.png)
 
 ### 4. Edit Application
-![Edit Application](./screenshots/photo4.png)
+![Edit Application](https://raw.githubusercontent.com/Ayushdahal12/job-application-tracker/main/screenshots/photo4.png)
 
 ### 5. Filter by Status
-![Filter Status](./screenshots/photo5.png)
+![Filter Status](https://raw.githubusercontent.com/Ayushdahal12/job-application-tracker/main/screenshots/photo5.png)
 
 ### 6. Search Applications
-![Search](./screenshots/photo6.png)
+![Search](https://raw.githubusercontent.com/Ayushdahal12/job-application-tracker/main/screenshots/photo6.png)
 
 ### 7. Mobile View
-![Mobile View](./screenshots/photo7.png)
+![Mobile View](https://raw.githubusercontent.com/Ayushdahal12/job-application-tracker/main/screenshots/photo7.png)
 
 ---
 
