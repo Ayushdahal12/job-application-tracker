@@ -20,7 +20,7 @@ A full-stack web application to organize and track job applications. Monitor app
 ## Tech Stack
 
 **Frontend:** React, Vite, Tailwind CSS, React Router, Axios
-**Backend:** Node.js, Express, PostgreSQL, Prisma ORM
+**Backend:** Node.js, Express js, PostgreSQL, Prisma ORM
 
 ---
 
