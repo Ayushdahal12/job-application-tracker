@@ -6,7 +6,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin:[ "http://localhost:5173",
+  "https://job-application-tracker-ten-bay.vercel.app/" ]
+}));
 app.use(express.json());
 
 // Routes
