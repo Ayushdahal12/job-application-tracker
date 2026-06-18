@@ -1,7 +1,5 @@
-const BASE_URL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/applications`
-  : "/applications";
-  
+const BASE_URL = "https://job-application-tracker-cs9w.onrender.com/applications";
+
 async function handleResponse(res) {
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || "Request failed");
