@@ -117,23 +117,6 @@ job-application-tracker/
 - `PUT /api/applications/:id` - Update application
 - `DELETE /api/applications/:id` - Delete application
 
----
-
-## Environment Variables
-
-**Frontend (.env)**
-```
-VITE_API_BASE_URL=http://localhost:5001/api
-```
-
-**Backend (.env)**
-```
-DATABASE_URL=postgresql://user:password@localhost:5432/job_tracker
-NODE_ENV=development
-PORT=5001
-```
-
----
 
 ## Troubleshooting
 
