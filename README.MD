@@ -69,6 +69,8 @@ npm run dev
 
 ## Deployment
 
+Live on : https://jobtracker.ayushdahal.info.np/
+
 ### Frontend to Vercel
 1. Push to GitHub
 2. Connect repository to Vercel
@@ -139,8 +141,3 @@ PORT=5001
 - Database errors: Verify DATABASE_URL and run migrations
 - Port in use: Kill process on port 5001 or 5173
 
----
-
-## License
-
-MIT
